@@ -117,11 +117,17 @@ Select "Token" on the Dashboard UI then copy and paste the entire token you rece
 
 
 # Manage Kubernetes Resources via Terraform
-TODO
+You can also user Terraform to manage K8s native resouces. Navigate to ./k8s_resources_with_terraform and see how to schedule Kubernetes deployment with Terraform.
+```
+$ cd k8s_resources_with_terraform/
+```
 
 # Clean up your workspace
 Congratulations, you have provisioned an EKS cluster, configured kubectl, and deployed the Kubernetes dashboard.
-terraform destroy
+You have also deployed native Kubernetes objects with Terraform! Go back to the root dir and delete EKS cluster and it's resouces.
+```
+$ terraform destroy
+```
 Navigate to the "Cluster" page by clicking on "Cluster" in the left navigation bar. You should see a list of nodes in your cluster.
 
 The Kubernetes cluster name and region correspond to the output variables showed after the successful Terraform run.
