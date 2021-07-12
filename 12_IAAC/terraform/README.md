@@ -5,7 +5,7 @@ The Amazon Elastic Kubernetes Service (EKS) is the AWS service for deploying, ma
 In this tutorial, you will deploy an EKS cluster using Terraform. Then, you will configure kubectl using Terraform output to deploy a Kubernetes dashboard on the cluster.
 
 
-#Why Terraform?
+# Why Terraform?
 
 While you could use the built-in AWS provisioning processes (UI, CLI, CloudFormation) for EKS clusters, Terraform provides you with several benefits:
 
@@ -46,14 +46,14 @@ For this tutorial, you will need:
 
 Once you have cloned the repository, initialize your Terraform workspace, which will download and configure the providers.
 ```
-$terraform init
+$ terraform init
 ```
 
 # Provision the EKS cluster
 
 In your initialized directory, run terraform apply and review the planned actions. Your terminal output should indicate the plan is running and what resources will be created.
 ```
-$terrafrom apply
+$ terrafrom apply
 ```
 This terraform apply will provision a total of 51 resources (VPC, Security Groups, AutoScaling Groups, EKS Cluster, etc...). Confirm the apply with a yes.
 
@@ -79,11 +79,11 @@ The Kubernetes Metrics Server, used to gather metrics such as cluster CPU and me
 
 Download and unzip the metrics server by running the following command.
 ```
-wget -O v0.3.6.tar.gz https://codeload.github.com/kubernetes-sigs/metrics-server/tar.gz/v0.3.6 && tar -xzf v0.3.6.tar.gz
+$ wget -O v0.3.6.tar.gz https://codeload.github.com/kubernetes-sigs/metrics-server/tar.gz/v0.3.6 && tar -xzf v0.3.6.tar.gz
 ```
 Deploy the metrics server to the cluster by running the following command.
 ```
-$kubectl apply -f metrics-server-0.3.6/deploy/1.8+/
+$ kubectl apply -f metrics-server-0.3.6/deploy/1.8+/
 ```
 
 Verify that the metrics server has been deployed. If successful, you should see something like this.
