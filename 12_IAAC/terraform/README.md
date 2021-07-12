@@ -1,4 +1,4 @@
-#Infrastructure as a Code with Terraform and AWS
+# Infrastructure as a Code with Terraform and AWS
 
 The Amazon Elastic Kubernetes Service (EKS) is the AWS service for deploying, managing, and scaling containerized applications with Kubernetes.
 
