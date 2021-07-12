@@ -42,7 +42,7 @@ For this tutorial, you will need:
 - versions.tf sets the Terraform version to at least 0.14. It also sets versions for the providers used in this sample.
 
 
-#Initialize Terraform workspace
+# Initialize Terraform workspace
 
 Once you have cloned the repository, initialize your Terraform workspace, which will download and configure the providers.
 ```
