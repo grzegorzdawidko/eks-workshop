@@ -68,7 +68,7 @@ aws eks describe-cluster --name basic-cluster
 
 upgrade cluster:
 
-edit cluster.yaml and add version
+edit cluster.yaml and add version, you can update only +1 version from your current at the time.
 
 
 
@@ -104,6 +104,8 @@ vpc:
       eu-north-1b: { id: subnet-iddsfsdfsddfsdfdb }
       eu-north-1c: { id: subnet-iddsfsdfsddfsdfdc }
 ```
+
+while cluster upgrade is in progress, please review other options from the eksctl cluster section: https://eksctl.io/usage/creating-and-managing-clusters/
 
 now please delete the cluster
 
