@@ -18,7 +18,7 @@ vi cluster.yaml
 ```
 
 
-type ``:q!`` to quit vi(m)
+type ``:wq`` to write and quit vi(m)
 
 ```
 eksctl create cluster -f cluster.yaml
