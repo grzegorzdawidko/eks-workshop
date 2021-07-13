@@ -49,3 +49,7 @@ Install: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authen
 brew install aws-iam-authenticator
 aws-iam-authenticator help
 ```
+
+# Terraform CLI
+
+Install: https://www.terraform.io/downloads.html
