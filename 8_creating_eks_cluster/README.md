@@ -8,6 +8,7 @@ kind: ClusterConfig
 metadata:
   name: basic-cluster
   region: us-west-2
+  version: "1.16"
 ```
 
 into cluster.yaml
