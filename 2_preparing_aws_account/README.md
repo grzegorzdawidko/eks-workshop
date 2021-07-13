@@ -17,6 +17,11 @@ Default region name [None]: us-west-2
 Default output format [None]: json
 ```
 
+```
+aws sts get-caller-identity
+```
+
+
 # EKSCTL
 
 Install: https://eksctl.io/introduction/#installation
