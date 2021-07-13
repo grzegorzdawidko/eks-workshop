@@ -73,7 +73,17 @@ eksctl get nodegroup --cluster=dev-cluster
 
 You can login to the ec2 instance of that group using ec2 connect SSM, let's try to to this form AWS console
 
-to delete nodegroup type:
+Now let's scale out our node group:
+```
+eksctl scale nodegroup --cluster=dev-cluster --nodes=2 managed-ng-2-workers
+```
+
+...and scale in
+```
+eksctl scale nodegroup --cluster=dev-cluster --nodes=1 managed-ng-2-workers
+```
+
+to delete one nodegroup type:
 ```
 eksctl delete nodegroup managed-ng-2-workers --cluster dev-cluster
 ```
