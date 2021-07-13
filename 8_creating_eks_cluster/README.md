@@ -59,5 +59,31 @@ login into aws console and let's take a look at the Cloudformation service in us
 when creation is done
 review following resources VPC, IAM, EKS, EC2 Security groups
 
-N
+upgrade cluster:
+
+edit cluster.yaml and add version
+
+
+
+
+```
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: basic-cluster
+  region: us-west-2
+  version: "1.20"
+```
+
+If you want to reuse existing vpc add vpc section:
+
+```
+```
+
+Delete cluster
+
+```
+eksctl delete cluster -f cluster.yaml
+```
 
