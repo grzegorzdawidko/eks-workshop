@@ -106,9 +106,13 @@ vpc:
       eu-north-1c: { id: subnet-iddsfsdfsddfsdfdc }
 ```
 
-while cluster upgrade is in progress, please review other options from the eksctl cluster section: https://eksctl.io/usage/creating-and-managing-clusters/
+while cluster upgrade is in progress, please review other options from the eksctl cluster section:
+https://eksctl.io/usage/creating-and-managing-clusters/
 
-now please delete the cluster
+and take a look at official github page: https://github.com/weaveworks/eksctl
+
+
+now, when upgrade is done please delete the cluster
 
 ```
 eksctl delete cluster -f cluster.yaml
