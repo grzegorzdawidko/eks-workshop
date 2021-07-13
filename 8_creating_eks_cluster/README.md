@@ -83,7 +83,7 @@ metadata:
   version: "1.17"
 ```
 
-run:
+run(it may take up to 30 mins to complete):
 ```
 eksctl upgrade cluster -f cluster.yaml --approve
 ```
