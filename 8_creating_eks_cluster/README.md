@@ -118,3 +118,4 @@ now, when upgrade is done please delete the cluster
 eksctl delete cluster -f cluster.yaml
 ```
 
+double check if all resources(EKS, VPC,...) are gone
