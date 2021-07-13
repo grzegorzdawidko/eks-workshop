@@ -2,6 +2,11 @@
 
 Install: https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html
 
+```
+$ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+$ sudo installer -pkg AWSCLIV2.pkg -target /
+```
+
 Configure: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
 
 ```
@@ -16,7 +21,17 @@ Default output format [None]: json
 
 Install: https://eksctl.io/introduction/#installation
 
+```
+brew tap weaveworks/tap
+brew install weaveworks/tap/eksctl
+```
+
 
 # KUBECTL
 
 Install: https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/
+
+```
+brew install kubectl 
+kubectl version --client
+```
