@@ -105,7 +105,7 @@ vpc:
       eu-north-1c: { id: subnet-iddsfsdfsddfsdfdc }
 ```
 
-no please delete the cluster
+now please delete the cluster
 
 ```
 eksctl delete cluster -f cluster.yaml
