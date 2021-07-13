@@ -40,3 +40,12 @@ Install: https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/
 brew install kubectl 
 kubectl version --client
 ```
+
+# AWS IAM AUTHENTICATOR
+
+Install: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+
+```
+brew install aws-iam-authenticator
+aws-iam-authenticator help
+```
