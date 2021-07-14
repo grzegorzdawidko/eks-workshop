@@ -99,4 +99,9 @@ For Kubernetes 1.19 use https://github.com/kubernetes/autoscaler/releases/tag/cl
 
 => set your EKS cluster name at the end of property ```- --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/<<EKS cluster name>>``` for example dev-cluster
 
+Check status:
+```
+kubectl get deployment -A
+```
+
 ## Deploy sample app and play with it
