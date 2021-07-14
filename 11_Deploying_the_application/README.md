@@ -242,8 +242,30 @@ kubectl delete deployment static-web -n deployment
 kubectl delete ns deployment
 ```
   
-## Create Service
-# ALB ingress controler
+# Create Service
+# ClusterIP
+service.yaml:
+```
+```
+```
+kubectl get service -n webapp
+
+webapp         service-webapp                      NodePort    10.100.246.160   <none>        8001:31994/TCP   96s
+```
+  
+```
+kubectl get pod -n webapp
+NAME                                 READY   STATUS    RESTARTS   AGE
+deployment-webapp-79ff5f6669-smbxr   1/1     Running   0          2m16s
+```
+
+```
+kubectl port-forward deployment-webapp-79ff5f6669-smbxr 8001:8001
+```
+  
+Now open webbrowser on localhost:8001. You should see "Hello, world!"
+
+## ALB ingress controler
 ```
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
 ```
