@@ -19,7 +19,7 @@ nodeGroups:
     labels: { role: workers }
     instanceType: t3.small
     minSize: 1
-    desiredCapacity: 1
+    desiredCapacity: 3
     maxSize: 4
     volumeSize: 20
     privateNetworking: true
@@ -243,3 +243,138 @@ kubectl delete ns deployment
 ```
   
 ## Create Service
+# ALB ingress controler
+```
+curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
+```
+```
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+```
+  
+Associate oidc provider
+```
+eksctl utils associate-iam-oidc-provider --region=us-west-2 --cluster=dev-cluster
+```
+
+Create IAM role for service account
+```
+eksctl create iamserviceaccount \
+  --cluster=dev-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --attach-policy-arn=arn:aws:iam::324952159288:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve 
+```
+ 
+```
+kubectl apply \
+    --validate=false \
+    -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
+```
+  
+```
+curl -o v2_2_0_full.yaml https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/v2_2_0_full.yaml
+```
+Make the following edits to the v2_2_0_full.yaml file:
+
+Delete the ServiceAccount section of the file. Deleting this section prevents the annotation with the IAM role from being overwritten when the controller is deployed and preserves the service account that you created in step 4 if you delete the controller.
+
+Replace your-cluster-name to the Deployment spec section of the file with the name of your cluster.
+
+Apply the file:
+```
+kubectl apply -f v2_2_0_full.yaml
+```
+  
+```
+ kubectl get ingress -n webapp
+```
+  
+```
+kubectl describe ingress ingress-webapp -n webapp
+```
+  
+Now we can deploy our ingress service
+ 
+ingress.yaml
+```
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webapp
+  name: deployment-webapp
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app-webapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app-webapp
+    spec:
+      containers:
+      - image: 324952159288.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
+        imagePullPolicy: Always
+        name: app-webapp
+        ports:
+        - containerPort: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webapp
+  name: service-webapp
+spec:
+  ports:
+    - port: 8001
+      targetPort: 8001
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: app-webapp
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  namespace: webapp
+  name: ingress-webapp
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: service-webapp
+              servicePort: 8001
+```
+
+Deploy ingress:
+```
+kubectl apply -f ingress.yaml 
+```
+
+Check ingress
+```
+kubectl get ingress -A
+``` 
+
+Copy load balancer address to your browser and Voila!
+
+Now let's delete it:
+```
+kubectl delete -f ingress.yaml 
+```
