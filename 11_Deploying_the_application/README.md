@@ -89,7 +89,7 @@ Check the logs:
 kubectl logs -f static-web -n test
 ```
 
-Check IP and Node IP assigned by CNI plugin
+Check IP and Node IP assigned by CNI plugin. Check EC2 instance network section from AWS console
 ```
 kubectl get pod -n test -owide
 ```
