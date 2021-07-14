@@ -91,9 +91,9 @@ edit deployment and set your EKS cluster name:
 kubectl -n kube-system edit deployment.apps/cluster-autoscaler
 ```
 
-Open https://github.com/kubernetes/autoscaler/releases
-and search latest match realise for your cluster version.
-For example for 1.19 use https://github.com/kubernetes/autoscaler/releases/tag/cluster-autoscaler-1.19.1
+Open https://github.com/kubernetes/autoscaler/releases and search latest match realise for your cluster version.
+
+For Kubernetes 1.19 use https://github.com/kubernetes/autoscaler/releases/tag/cluster-autoscaler-1.19.1
 
 => set the image version at property ```image=k8s.gcr.io/cluster-autoscaler:vx.yy.z``` for example 1.19.1
 
