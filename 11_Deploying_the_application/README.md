@@ -243,7 +243,7 @@ kubectl delete ns deployment
 ```
   
 # Create Service
-# ClusterIP
+## NodePort
 service.yaml:
 ```
 ---
@@ -288,6 +288,7 @@ spec:
   selector:
     app.kubernetes.io/name: app-webapp
 ```
+  
 ```
 kubectl get service -n webapp
 
