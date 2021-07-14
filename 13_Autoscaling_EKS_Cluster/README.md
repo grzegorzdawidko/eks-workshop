@@ -186,3 +186,7 @@ or
 ```
 eksctl delete cluster -f cluster.yaml 
 ```
+
+# Extra materials
+If you want to scale your pod automatically please take a look at the horizontal pod autoscaler: 
+https://docs.aws.amazon.com/eks/latest/userguide/horizontal-pod-autoscaler.html
