@@ -117,6 +117,9 @@ kind: Deployment
 metadata:
   name: test-autoscaler
 spec:
+  selector:
+    matchLabels:
+      app: nginx
   replicas: 1
   template:
     metadata:
@@ -168,4 +171,16 @@ kubectl -n kube-system logs deployment.apps/cluster-autoscaler | grep "Expanding
 ```
 kubectl -n kube-system logs deployment.apps/cluster-autoscaler | grep "removing node"
 ```
+
+
+### scale down deployment
+```
+kubectl scale --replicas=1 deployment/test-autoscaler
+```
+
+## delete eks nodes (or cluster) if you finish for today
+```
+eksctl delete nodes -f cluster.yaml
+```
+
 
