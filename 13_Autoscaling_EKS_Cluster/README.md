@@ -112,7 +112,7 @@ kubectl -n kube-system logs deployment.apps/cluster-autoscaler
 
 nginx-deploymnt.yaml
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-autoscaler
