@@ -360,7 +360,8 @@ kubectl apply -f v2_2_0_full.yaml
 ```
 kubectl describe ingress ingress-webapp -n webapp
 ```
-  
+ 
+# Ingress
 Now we can deploy our ingress service
  
 ingress.yaml
