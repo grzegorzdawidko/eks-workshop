@@ -107,3 +107,37 @@ kubectl get deployment -A
 kubectl -n kube-system logs deployment.apps/cluster-autoscaler
 ```
 ## Deploy sample app and play with it
+
+### create a deployment of nginx
+
+```
+kubectl apply -f nginx-deployment.yaml
+```
+
+### scale the deployment
+
+```
+kubectl scale --replicas=3 deployment/test-autoscaler
+```
+
+### check pods
+
+```
+kubectl get pods -o wide --watch
+```
+
+### check nodes 
+
+```
+kubectl get nodes
+```
+
+### view cluster autoscaler logs
+
+```
+kubectl -n kube-system logs deployment.apps/cluster-autoscaler | grep "Expanding Node Group"
+```
+```
+kubectl -n kube-system logs deployment.apps/cluster-autoscaler | grep "removing node"
+```
+
