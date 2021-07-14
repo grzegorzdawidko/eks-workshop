@@ -106,7 +106,7 @@ by default nodes are cordoned and pods are evicted from a nodegroup on deletion,
 eksctl drain nodegroup --cluster=dev-cluster --name=managed-ng-2-workers
 ```
 
-then to delete one nodegroups type:
+then to delete our nodegroups type:
 ```
 eksctl delete nodegroup ng-1-workers --cluster dev-cluster
 eksctl delete nodegroup managed-ng-2-workers --cluster dev-cluster
