@@ -45,6 +45,11 @@ kubectl cluster-info
 kubectl cluster-info dump
 ```
 
+Check kluster nodes:
+```
+ kubectl get nodes
+```
+
 List all pods in all namespaces:
 ```
 kubectl get pods -A
