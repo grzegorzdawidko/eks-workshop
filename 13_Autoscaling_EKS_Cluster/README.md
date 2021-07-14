@@ -103,5 +103,7 @@ Check status:
 ```
 kubectl get deployment -A
 ```
-
+```
+kubectl -n kube-system logs deployment.apps/cluster-autoscaler
+```
 ## Deploy sample app and play with it
