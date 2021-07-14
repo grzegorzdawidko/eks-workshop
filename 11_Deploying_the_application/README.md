@@ -246,6 +246,47 @@ kubectl delete ns deployment
 # ClusterIP
 service.yaml:
 ```
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: webapp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: webapp
+  name: deployment-webapp
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app-webapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app-webapp
+    spec:
+      containers:
+      - image: 324952159288.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
+        imagePullPolicy: Always
+        name: app-webapp
+        ports:
+        - containerPort: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: webapp
+  name: service-webapp
+spec:
+  ports:
+    - port: 8001
+      targetPort: 8001
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: app-webapp
 ```
 ```
 kubectl get service -n webapp
