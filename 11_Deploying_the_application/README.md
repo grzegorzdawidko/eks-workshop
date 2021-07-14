@@ -50,7 +50,7 @@ List all pods in all namespaces:
 kubectl get pods -A
 ```
 
-Let's create simple pod from our python app:
+Let's create simple pod from our python app, update <account_id> with your account id:
 
 pod.yaml
 ```
@@ -63,7 +63,7 @@ metadata:
 spec:
   containers:
     - name: web
-      image: 324952159288.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
+      image: <account_id>.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
       ports:
         - name: web
           containerPort: 8001
