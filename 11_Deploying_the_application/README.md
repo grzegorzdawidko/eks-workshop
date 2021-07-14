@@ -94,6 +94,17 @@ Check IP and Node IP assigned by CNI plugin. Check EC2 instance network section 
 kubectl get pod -n test -owide
 ```
 
+Now let's delete pod and a namespace:
+
+pod:
+```
+kubectl delete pod static-web -n test
+```
+
+ns:
+```
+kubectl delete ns test
+```
 
 ## Create Deployment
 ## Create Service
