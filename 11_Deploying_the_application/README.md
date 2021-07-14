@@ -305,12 +305,22 @@ deployment-webapp-79ff5f6669-smbxr   1/1     Running   0          2m16s
 kubectl port-forward deployment-webapp-79ff5f6669-smbxr 8001:8001
 ```
   
-Now open webbrowser on localhost:8001. You should see "Hello, world!"
+Open webbrowser on localhost:8001. You should see "Hello, world!"
 
+Now delete service, deployment and pods:
+```
+kubectl delete -f service.yaml
+```
+  
 ## ALB ingress controler
+# Install required software
+
+IAM policy
 ```
 curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
 ```
+
+Create policy
 ```
 aws iam create-policy \
     --policy-name AWSLoadBalancerControllerIAMPolicy \
@@ -333,12 +343,14 @@ eksctl create iamserviceaccount \
   --approve 
 ```
  
+Install cert manager
 ```
 kubectl apply \
     --validate=false \
     -f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
 ```
-  
+
+Download alb controller:
 ```
 curl -o v2_2_0_full.yaml https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/v2_2_0_full.yaml
 ```
@@ -353,13 +365,11 @@ Apply the file:
 kubectl apply -f v2_2_0_full.yaml
 ```
   
+Check ingress controller
 ```
- kubectl get ingress -n webapp
+kubectl get pod -A
 ```
-  
-```
-kubectl describe ingress ingress-webapp -n webapp
-```
+
  
 # Ingress
 Now we can deploy our ingress service
