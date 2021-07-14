@@ -112,4 +112,99 @@ kubectl delete ns test
 ```
 
 ## Create Deployment
+
+deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-web
+spec:
+  selector:
+    matchLabels:
+      app: webapp
+      role: myrole
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webapp
+        role: myrole
+        tier: backend
+    spec:
+      containers:
+      - name: webapp
+        image: <account_id>.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8001
+```
+
+Create namespace deployment
+```
+kubectl create ns deployment
+```
+
+Deploy our app
+```
+kubectl apply -f deployment.yaml -n deployment
+```
+
+Check pod:
+```
+kubectl get pod -n deployment
+```
+
+ReplicaSet was created automatically
+```
+ kubectl get replicaset -n deployment
+```
+
+And there is our deployment:
+```
+kubectl get deployment -n deployment
+```
+
+Let's scale our deployment by editing <replicas> parameter of deployment object
+
+```  
+kubectl edit deployment -n deployment
+  
+and set ** replicas: 2 **
+```
+deployment.yaml
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-web
+spec:
+  selector:
+    matchLabels:
+      app: webapp
+      role: myrole
+      tier: backend
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: webapp
+        role: myrole
+        tier: backend
+    spec:
+      containers:
+      - name: webapp
+        image: <account_id>.dkr.ecr.us-west-2.amazonaws.com/repo1:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8001
+```
+  
 ## Create Service
