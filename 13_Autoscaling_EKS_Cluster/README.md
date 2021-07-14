@@ -182,5 +182,7 @@ kubectl scale --replicas=1 deployment/test-autoscaler
 ```
 eksctl delete nodes -f cluster.yaml
 ```
-
-
+or
+```
+eksctl delete cluster -f cluster.yaml 
+```
