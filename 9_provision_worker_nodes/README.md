@@ -120,3 +120,73 @@ eksctl create cluster --name dev-cluster --managed --instance-selector-vcpus=2 -
 ```
 
 # Spot instances
+
+## Spot instance with managed nodegroups
+
+edit cluster.yaml
+
+```
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: dev-cluster
+  region: us-west-2
+
+managedNodeGroups:
+- name: spot-1
+  instanceTypes: ["t2.micro", "t2.small"]
+  spot: true
+
+- name: spot-2
+  instanceTypes: ["t3.micro", "t3.small"]
+  spot: true
+
+# On-Demand instances
+- name: on-demand
+  instanceTypes: "t3.micro", "t3.small"]
+```
+
+check Ec2 panel and do the cleanup
+
+```
+eksctl delete nodegroup -f cluster.yaml --approve
+```
+
+## Spot instance with unmanaged nodegroups
+
+Eksctl has support for spot instances through the MixedInstancesPolicy for Auto Scaling Groups
+Let's see how it works.
+
+edit cluster.yaml
+
+```
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: dev-cluster
+  region: us-west-2
+  
+nodeGroups:
+  - name: ng-1 # 50% spot, 50% on-demand
+    minSize: 1
+    maxSize: 3
+    instancesDistribution:
+      maxPrice: 0.017
+      instanceTypes: ["t3.small", "t3.medium"] # At least one instance type should be specified
+      onDemandBaseCapacity: 0
+      onDemandPercentageAboveBaseCapacity: 50
+      spotInstancePools: 2
+```
+
+deploy nodegroup:
+```
+eksctl create nodegroup -f cluster.yaml
+```
+
+Take a look at EC2, Launch temaple, spot requests..
+and do the clean up
+```
+eksctl delete nodegroup -f cluster.yaml --approve
+```
