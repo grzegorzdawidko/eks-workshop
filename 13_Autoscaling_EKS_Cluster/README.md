@@ -110,6 +110,34 @@ kubectl -n kube-system logs deployment.apps/cluster-autoscaler
 
 ### create a deployment of nginx
 
+nginx-deploymnt.yaml
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: test-autoscaler
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: nginx
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: test-autoscaler
+        resources:
+          limits:
+            cpu: 300m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 512Mi
+      nodeSelector:
+        instance-type: spot
+```
+
 ```
 kubectl apply -f nginx-deployment.yaml
 ```
