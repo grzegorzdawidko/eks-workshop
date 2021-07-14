@@ -233,7 +233,7 @@ Now check pods AGE
 kubectl get pod -owide -n deployment
 ```
 
-Let do the cleanup
+Let's do the cleanup
 ```
 kubectl delete deployment static-web -n deployment
 ```
