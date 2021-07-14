@@ -173,9 +173,10 @@ Let's scale our deployment by editing <replicas> parameter of deployment object
 
 ```  
 kubectl edit deployment -n deployment
+ ```
   
 and set ** replicas: 2 **
-```
+
 deployment.yaml
 ```
 apiVersion: apps/v1
@@ -205,6 +206,40 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 8001
+```
+
+Inspect deployment
+```
+kubectl describe deployment static-web -n deployment
+```
+  
+to make it more visible grep scaling acrtivities
+```
+kubectl describe deployment static-web -n deployment | grep ScalingReplicaSet
+```
+  
+Now let's kill pod and see what happens:
+```
+kubectl get pod -n deployment
+```
+  
+```
+kubectl delete pod static-web-5df7d86566-6zwdd  -n deployment
+```  
+
+
+Now check pods AGE
+```
+kubectl get pod -owide -n deployment
+```
+
+Let do the cleanup
+```
+kubectl delete deployment static-web -n deployment
+```
+
+```
+kubectl delete ns deployment
 ```
   
 ## Create Service
