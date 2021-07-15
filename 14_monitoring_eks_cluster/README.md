@@ -278,4 +278,21 @@ prometheus: prometheus-server.prometheus.svc.cluster.local
 ### Let's install some cool dashboard
 https://grafana.com/grafana/dashboards
 
-for example 10000
+for example 3119 or 10000
+
+## Delete
+
+### Delete grafana
+```
+kubectl delete -f grafana.yaml -n grafana
+```
+
+### Delete prometheus with helm
+```
+ helm uninstall prometheus --namespace prometheus
+```
+
+### Delete eks cluster
+```
+eksctl delete cluster -f cluster.yaml
+```
