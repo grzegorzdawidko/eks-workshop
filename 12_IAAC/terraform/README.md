@@ -111,54 +111,7 @@ Run the following command to retrieve the access credentials for your cluster an
 ```
 $ aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 ```
-
-# Deploy and access Kubernetes Dashboard
-To verify that your cluster is configured correctly and running, you will deploy the Kubernetes dashboard and navigate to it in your local browser.
-
-While you can deploy the Kubernetes metrics server and dashboard using Terraform, kubectl is used in this tutorial so you don't need to configure your Terraform Kubernetes Provider.
-
-
-# Deploy Kubernetes Metrics Server
-The Kubernetes Metrics Server, used to gather metrics such as cluster CPU and memory usage over time, is not deployed by default in EKS clusters.
-
-Download and unzip the metrics server by running the following command.
-```
-$ wget -O v0.3.6.tar.gz https://codeload.github.com/kubernetes-sigs/metrics-server/tar.gz/v0.3.6 && tar -xzf v0.3.6.tar.gz
-```
-Deploy the metrics server to the cluster by running the following command.
-```
-$ kubectl apply -f metrics-server-0.3.6/deploy/1.8+/
-```
-
-Verify that the metrics server has been deployed. If successful, you should see something like this.
-```
-$ kubectl get deployment metrics-server -n kube-system
-```
-
-# Deploy Kubernetes Dashboard
-The following command will schedule the resources necessary for the dashboard.
-```
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
-```
-Now, create a proxy server that will allow you to navigate to the dashboard from the browser on your local machine. This will continue running until you stop the process by pressing CTRL + C.
-```
-$ kubectl proxy
-```
-You should be able to access the Kubernetes dashboard here (http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/).
-
-# Authenticate the dashboard
-To use the Kubernetes dashboard, you need to create a ClusterRoleBinding and provide an authorization token. This gives the cluster-admin permission to access the kubernetes-dashboard. Authenticating using kubeconfig is not an option. You can read more about it in the Kubernetes documentation.
-
-In another terminal (do not close the kubectl proxy process), create the ClusterRoleBinding resource.
-```
-$ kubectl apply -f https://raw.githubusercontent.com/hashicorp/learn-terraform-provision-eks-cluster/master/kubernetes-dashboard-admin.rbac.yaml
-```
-Then, generate the authorization token.
-```
-$ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep service-controller-token | awk '{print $1}')
-```
-Select "Token" on the Dashboard UI then copy and paste the entire token you receive into the dashboard authentication screen to sign in. You are now signed in to the dashboard for your Kubernetes cluster.
-
+``
 
 # Manage Kubernetes Resources via Terraform
 You can also user Terraform to manage K8s native resouces. Navigate to ./k8s_resources_with_terraform and see how to schedule Kubernetes deployment with Terraform.
