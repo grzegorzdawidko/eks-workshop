@@ -47,11 +47,52 @@ It also assumes that you are familiar with the usual Terraform plan/apply workfl
 
 # Initialize Terraform workspace
 
-Once you have cloned the repository, initialize your Terraform workspace, which will download and configure the providers.
+Create versions.tf.
+Initialize your Terraform workspace, which will download and configure the providers.
+```
+$ terraform init
+```
+Now let's add vpc.tf
+
+```
+$ terraform plan
+```
+
+We have install vpc module, so type again:
+
 ```
 $ terraform init
 ```
 
+OK. Now run plan again and see what will be created:
+```
+$ terraform plan
+```
+Now we can deploy VPC, confirm with 'yes'
+```
+$ terraform apply
+```
+
+Check in AWS Console VPC and VPC subnets.
+
+Let's add  security-groups.tf
+```
+$ terraform plan
+```
+```
+$ terraform apply
+```
+
+Now create kubernetes.tf, outputs.tf and eks.tf
+```
+$ terraform init
+```
+```
+$ terraform plan
+```
+```
+$ terraform apply
+```
 # Provision the EKS cluster
 
 In your initialized directory, run terraform apply and review the planned actions. Your terminal output should indicate the plan is running and what resources will be created.
