@@ -18,11 +18,14 @@ While you could use the built-in AWS provisioning processes (UI, CLI, CloudForma
 
 # Prereqs
 
+## Terraform cli
+https://learn.hashicorp.com/tutorials/terraform/install-cli
+
 The tutorial assumes some basic familiarity with Kubernetes and kubectl but does not assume any pre-existing deployment.
 
 It also assumes that you are familiar with the usual Terraform plan/apply workflow. If you're new to Terraform itself, refer first to the Getting Started tutorial.
 
-For this tutorial, you will need:
+## For this tutorial, you will need:
 
 - an AWS account with the IAM permissions listed on the EKS module documentation,
 - a configured AWS CLI
