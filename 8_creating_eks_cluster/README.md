@@ -8,7 +8,7 @@ kind: ClusterConfig
 metadata:
   name: basic-cluster
   region: us-west-2
-  version: "1.16"
+  version: "1.18"
 ```
 
 into cluster.yaml
@@ -80,7 +80,7 @@ kind: ClusterConfig
 metadata:
   name: basic-cluster
   region: us-west-2
-  version: "1.17"
+  version: "1.19"
 ```
 
 run(it may take up to 30 mins to complete):
